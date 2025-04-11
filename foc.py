@@ -387,7 +387,7 @@ def alignmentRatio(motor):
     # (motor.torque_constant**2 * motor.pole_pairs) / (motor.max_torque * motor.terminal_inductance)
 
     ratio = (motor.pole_pairs * motor.torque_constant**2) / (motor.max_torque * motor.terminal_inductance)
-    print "Motor alignment ratio is ", ratio
+    print("Motor alignment ratio is ", ratio)
     return ratio    
 
 
@@ -425,14 +425,14 @@ class PI_Controller:
 
 class FOC_Controller:
     def __init__(self, dt, motor, d_gains, q_gains, supply_current_limit):
-	self.name = "Python FOC"
+        self.name = "Python FOC"
         self.dt = dt
         self.motor = motor
         self.supply_current_limit = supply_current_limit
 
         self.d_ctrl = PI_Controller(d_gains)
         self.q_ctrl = PI_Controller(q_gains)
-        
+
         self.t = [0.0]
         self.measured_torque = [0.0]
         self.measured_id = [0.0]
@@ -442,7 +442,7 @@ class FOC_Controller:
         self.target_torque = [0.0] #what torque was actually limited to
         self.target_id = [0.0]
         self.target_iq = [0.0]
-        
+
         self.cmd_a = [0.0]
         self.cmd_b = [0.0]
         self.cmd_c = [0.0]
@@ -627,7 +627,7 @@ class FOC_CWrapper:
     Makes interface to C++ functions almost exactly the same as the python implemenation.
     """
     def __init__(self, dt, motor, d_gains, q_gains, supply_current_limit):
-	self.name = "C++ FOC"
+        self.name = "C++ FOC"
         # I know this is frowned upon, but we don't want to import foc_py
         # if we are not using it -- especially since it needs to be compiled first
         import foc_py 
@@ -650,7 +650,7 @@ class FOC_CWrapper:
         foc.pole_pairs = motor.pole_pairs
 
         self.cmds_v3 = foc_py.FOC_Vector3()
-        
+
         self.t = [0.0]
         self.input_target_torque = [0.0]
         self.measured_torque = [0.0]
@@ -660,7 +660,7 @@ class FOC_CWrapper:
         self.target_torque = [0.0]
         self.target_id = [0.0]
         self.target_iq = [0.0]
-        
+
         self.cmd_a = [0.0]
         self.cmd_b = [0.0]
         self.cmd_c = [0.0]
